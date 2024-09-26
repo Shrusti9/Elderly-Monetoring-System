@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELderly Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <img src="img2.png" alt="">
+        <a class="logo" href="#">ELderly Management System<span>.</span> </a>
+        <ul class="menu-links">
+            <span id="close-menu-btn" class="material-symbols-outlined">close</span>
+            <li><a href="project.html">Home</a></li>
+            <li><a href="login.php">Sign-in</a></li>
+            <li><a href="about.php">About us</a></li>
+            <li><a href="check.php">Check-Up</a></li>
+        </ul>
+        <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
+    </nav>
+</header>
+
+<section class="hero-section">
+    <div class="content">
+        <h2>Start Your Day With some health Updates!!</h2>
+        <p>
+            Empower your loved ones with peace of mind and independence through our comprehensive health and elderly
+            monitoring system, designed to provide real-time insights and support for their well-being.
+        </p>
+
+        <button id="register-btn" onclick="load()">Register</button>
+        <!-- <div class="overlay" id="overlay-register"></div>
+        <div class="popup" id="popup-register">
+            <span class="close-popup-btn material-symbols-outlined">close</span>
+            <h3>Register Here!!</h3>
+            <form action="#" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="username" required><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required><br><br>
+                <label for="phone.no">Phone_no:</label>
+                <input type="number" id="phone.no" name="phone.no" required><br><br>
+                <input type="submit" value="Register">
+            </form>
+        </div> -->
+
+       <!--  <button id="check-health-btn">Check Your Health</button>
+        <div class="overlay" id="overlay-check-health"></div>
+        <div class="popup" id="popup-check-health">
+            <span class="close-popup-btn material-symbols-outlined" id="cls">close</span>
+            <h3>Check Your Health!!</h3>
+            <form action="#" method="post" id="health-form">
+              <div class="cont"> 
+                <input type="number" id="age" name="age" required placeholder="Enter your age" class="inp"><br><br>
+                <input type="number" id="bpm" name="bpm" class="inp" placeholder="Enter your BPM"><br><br>
+                <input type="number" id="spo2" name="spo2" required placeholder="Enter your SPO2" class="inp"><br><br>
+                <input type="submit" value="Submit">
+            </div> 
+            </form> -->
+            <p id="health-feedback"></p>
+        </div>
+        <div class="popup" id="popup-about-us">
+          <span class="close-popup-btn material-symbols-outlined">close</span>
+          <h3>About Us</h3>
+          <p>
+              We are dedicated to providing innovative solutions for the elderly and their families,
+              promoting independence and well-being through technology and compassionate care.
+          </p>
+      </div>
+    </div>
+</section>
+
+<script>
+    const header = document.querySelector("header");
+    const hamburgerBtn = document.querySelector("#hamburger-btn");
+    const closeMenuBtn = document.querySelector("#close-menu-btn");
+    const registerBtn = document.querySelector("#register-btn");
+    const checkHealthBtn = document.querySelector("#check-health-btn");
+    const popupRegister = document.querySelector("#popup-register");
+    const overlayRegister = document.querySelector("#overlay-register");
+    const popupCheckHealth = document.querySelector("#popup-check-health");
+    const overlayCheckHealth = document.querySelector("#overlay-check-health");
+    const closePopupBtns = document.querySelectorAll(".close-popup-btn");
+    const healthForm = document.querySelector("#health-form");
+    const healthFeedback = document.querySelector("#health-feedback");
+
+    hamburgerBtn.addEventListener("click", () => header.classList.toggle("show-mobile-menu"));
+    closeMenuBtn.addEventListener("click", () => hamburgerBtn.click());
+
+    registerBtn.addEventListener("click", () => {
+        popupRegister.style.display = "block";
+        overlayRegister.style.display = "block";
+    });
+
+    checkHealthBtn.addEventListener("click", () => {
+        popupCheckHealth.style.display = "block";
+        overlayCheckHealth.style.display = "block";
+    });
+
+    closePopupBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            popupRegister.style.display = "none";
+            overlayRegister.style.display = "none";
+            popupCheckHealth.style.display = "none";
+            overlayCheckHealth.style.display = "none";
+        });
+    });
+
+    overlayRegister.addEventListener("click", () => {
+        popupRegister.style.display = "none";
+        overlayRegister.style.display = "none";
+    });
+
+    overlayCheckHealth.addEventListener("click", () => {
+        popupCheckHealth.style.display = "none";
+        overlayCheckHealth.style.display = "none";
+    });
+
+    healthForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const age = parseInt(document.querySelector("#age").value);
+        const bpm = parseInt(document.querySelector("#bpm").value);
+        const spo2 = parseInt(document.querySelector("#spo2").value);
+
+        let feedback = "Your health is normal.";
+
+        if (age > 65) {
+            if (bpm > 100 || spo2 < 95) {
+                feedback = "Your health needs attention. Please consult a healthcare professional.";
+            }
+        } else {
+            if (bpm < 60 || spo2 < 90 || spo2 > 110) {
+                feedback = "Your health needs attention. Please consult a healthcare professional.";
+            }
+        }
+
+        healthFeedback.textContent = feedback;
+    });
+
+
+    function load(){
+        location.href = "register.php"
+    }
+
+</script>
+
+</body>
+</html>
